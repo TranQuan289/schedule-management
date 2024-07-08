@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:schedule_management/features/auth/pages/sign_in_view.dart';
-import 'package:schedule_management/features/auth/pages/sign_up_view.dart';
+import 'package:schedule_management/features/auth/sign_in_view.dart';
+import 'package:schedule_management/features/auth/sign_up_view.dart';
+import 'package:schedule_management/features/bottom_navigator/bottom_navigator_view.dart';
 
 import 'routes_name.dart';
 
@@ -14,6 +15,10 @@ class Routes {
       case RoutesName.signUp:
         return MaterialPageRoute(
           builder: (BuildContext context) => const SignUpView(),
+        );
+      case RoutesName.bottomNavigator:
+        return MaterialPageRoute(
+          builder: (BuildContext context) => const BottomNavigationView(),
         );
       default:
         return MaterialPageRoute(builder: (_) {
@@ -34,5 +39,10 @@ class Routes {
   static void goToSignUpScreen(BuildContext context) {
     Navigator.of(context).pushNamedAndRemoveUntil(
         RoutesName.signUp, (Route<dynamic> route) => false);
+  }
+
+  static void goToBottomNavigatorScreen(BuildContext context) {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        RoutesName.bottomNavigator, (Route<dynamic> route) => false);
   }
 }

@@ -73,7 +73,9 @@ class _SignInViewState extends State<SignInView> {
               ),
               TextButtonWidget(
                 label: 'Login',
-                onPressed: () {},
+                onPressed: () {
+                  Routes.goToBottomNavigatorScreen(context);
+                },
               ),
               SizedBox(
                 height: 20.h,
