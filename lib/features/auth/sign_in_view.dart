@@ -80,21 +80,6 @@ class _SignInViewState extends State<SignInView> {
               SizedBox(
                 height: 20.h,
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  child: Text(
-                    'Forgot password?',
-                    style: TextStyle(
-                      color: ColorUtils.textColor,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
               Row(
                 children: [
                   Expanded(

@@ -1,3 +1,4 @@
+import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +29,7 @@ class _ChatViewState extends BaseStateDelegate<ChatView, ProfileNotifier>
       appBar: AppBar(
         backgroundColor: ColorUtils.primaryBackgroundColor,
         title: Text(
-          'Chat',
+          'Chat', 
           style: TextStyle(
             color: ColorUtils.primaryColor,
             fontSize: 24.sp,
@@ -43,6 +44,25 @@ class _ChatViewState extends BaseStateDelegate<ChatView, ProfileNotifier>
           builder: (BuildContext context, WidgetRef ref, Widget? child) {
             return Column(
               children: [
+                BubbleSpecialOne(
+                  text: 'Hello, how are you?',
+                  isSender: true,
+                  color: ColorUtils.primaryColor,
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                BubbleSpecialOne(
+                  text: 'I am good, thank you!',
+                  isSender: false,
+                  color: ColorUtils.blueMiddleColor,
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                // Add more chat bubbles here
               ],
             );
           },
