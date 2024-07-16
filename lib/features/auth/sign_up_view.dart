@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule_management/common/widgets/loading_widget.dart';
 import 'package:schedule_management/common/widgets/text_button_widget.dart';
 import 'package:schedule_management/common/widgets/text_form_field.dart';
 import 'package:schedule_management/model/user_model.dart';
@@ -21,19 +22,26 @@ class _SignUpViewState extends State<SignUpView> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  final UserService _userService = UserService();
+  final AuthService _userService = AuthService();
   bool _isPasswordVisible = false;
 
   void _register() async {
     if (_formKey.currentState!.validate()) {
       User user = User(
+        id: "",
         name: _nameController.text,
         phone: _phoneController.text,
         email: _emailController.text,
         password: _passwordController.text,
         dateOfBirth: DateTime.now().toString(),
       );
-
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const LoadingWidget();
+        },
+      );
       try {
         final response = await _userService.registerUser(user);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -41,6 +49,7 @@ class _SignUpViewState extends State<SignUpView> {
         ));
         Routes.goToSignInScreen(context);
       } catch (e) {
+        Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Failed to register user'),
         ));
@@ -64,9 +73,10 @@ class _SignUpViewState extends State<SignUpView> {
                 Text(
                   'Nice to know you!',
                   style: TextStyle(
-                      color: ColorUtils.primaryColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold),
+                    color: ColorUtils.primaryColor,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
                   'Enter your account to continue',

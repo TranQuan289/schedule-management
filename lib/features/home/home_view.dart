@@ -1,26 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule_management/common/base_state_delegate/base_state_delegate.dart';
-import 'package:schedule_management/common/widgets/item_doctor_widget.dart';
-import 'package:schedule_management/features/profile/notifier/profile_notifier.dart';
+import 'package:schedule_management/features/home/widgets/doctor_list_widget.dart';
 import 'package:schedule_management/utils/color_utils.dart';
 
-class HomeView extends ConsumerStatefulWidget {
-  const HomeView({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({Key? key}) : super(key: key);
 
   @override
-  BaseStateDelegate<HomeView, ProfileNotifier> createState() =>
-      _HomeViewState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeViewState extends BaseStateDelegate<HomeView, ProfileNotifier>
+class _HomeViewState extends State<HomeView>
     with AutomaticKeepAliveClientMixin {
-  @override
-  void initNotifier() {
-    notifier = ref.read(profileNotifierProvider.notifier);
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -29,7 +20,7 @@ class _HomeViewState extends BaseStateDelegate<HomeView, ProfileNotifier>
       appBar: AppBar(
         backgroundColor: ColorUtils.primaryBackgroundColor,
         title: Text(
-          'List',
+          'List Doctors',
           style: TextStyle(
             color: ColorUtils.primaryColor,
             fontSize: 24.sp,
@@ -40,13 +31,7 @@ class _HomeViewState extends BaseStateDelegate<HomeView, ProfileNotifier>
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         padding: const EdgeInsets.only(bottom: 40),
-        child: Consumer(
-          builder: (BuildContext context, WidgetRef ref, Widget? child) {
-            return Column(
-              children: [ItemDoctorWidget()],
-            );
-          },
-        ),
+        child: DoctorListWidget(),
       ),
     );
   }

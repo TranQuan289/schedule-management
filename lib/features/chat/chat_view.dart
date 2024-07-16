@@ -2,25 +2,18 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule_management/common/base_state_delegate/base_state_delegate.dart';
-import 'package:schedule_management/features/profile/notifier/profile_notifier.dart';
+
 import 'package:schedule_management/utils/color_utils.dart';
 
-class ChatView extends ConsumerStatefulWidget {
+class ChatView extends StatefulWidget {
   const ChatView({super.key});
 
   @override
-  BaseStateDelegate<ChatView, ProfileNotifier> createState() =>
-      _ChatViewState();
+  _ChatViewState createState() => _ChatViewState();
 }
 
-class _ChatViewState extends BaseStateDelegate<ChatView, ProfileNotifier>
+class _ChatViewState extends State<ChatView>
     with AutomaticKeepAliveClientMixin {
-  @override
-  void initNotifier() {
-    notifier = ref.read(profileNotifierProvider.notifier);
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -29,7 +22,7 @@ class _ChatViewState extends BaseStateDelegate<ChatView, ProfileNotifier>
       appBar: AppBar(
         backgroundColor: ColorUtils.primaryBackgroundColor,
         title: Text(
-          'Chat', 
+          'Chat',
           style: TextStyle(
             color: ColorUtils.primaryColor,
             fontSize: 24.sp,
@@ -62,7 +55,6 @@ class _ChatViewState extends BaseStateDelegate<ChatView, ProfileNotifier>
                     fontSize: 16,
                   ),
                 ),
-                // Add more chat bubbles here
               ],
             );
           },

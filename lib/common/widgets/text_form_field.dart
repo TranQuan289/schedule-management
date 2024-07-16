@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule_management/utils/color_utils.dart';
 
-
 class TextFormFieldCustomWidget extends StatelessWidget {
   final String? hint;
   final String? label;
@@ -12,9 +11,10 @@ class TextFormFieldCustomWidget extends StatelessWidget {
   final TextInputAction? inputAction;
   final Function(String value)? onChanged;
   final TextInputType? textInputType;
+  final String? Function(String?)? validator;
 
   const TextFormFieldCustomWidget({
-    super.key,
+    Key? key,
     this.hint,
     this.label,
     this.controller,
@@ -23,7 +23,8 @@ class TextFormFieldCustomWidget extends StatelessWidget {
     this.obscureText,
     this.inputAction,
     this.textInputType,
-  });
+    this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +48,7 @@ class TextFormFieldCustomWidget extends StatelessWidget {
           onChanged: onChanged,
           keyboardType: textInputType,
           textInputAction: inputAction,
+          validator: validator,
           decoration: InputDecoration(
             hintText: hint,
             contentPadding: EdgeInsets.symmetric(

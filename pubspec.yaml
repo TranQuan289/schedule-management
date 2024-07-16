@@ -46,6 +46,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.10+1
   chat_bubbles: ^1.6.0
+  flutter_hooks: ^0.20.5
 
 dev_dependencies:
   flutter_test:

@@ -1,16 +1,18 @@
 class User {
+  String id;
   String name;
   String phone;
   String email;
-  String password;
-  String dateOfBirth;
+  String? password;
+  String? dateOfBirth;
 
   User({
+    required this.id,
     required this.name,
     required this.phone,
     required this.email,
-    required this.password,
-    required this.dateOfBirth,
+    this.password,
+    this.dateOfBirth,
   });
 
   Map<String, dynamic> toJson() {
@@ -25,9 +27,10 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      name: json['name'],
-      phone: json['phone'],
-      email: json['email'],
+      id: json['_id'] ?? '',
+      name: json['name'] ?? '',
+      phone: json['phone'] ?? '',
+      email: json['email'] ?? '',
       password: json['password'],
       dateOfBirth: json['date_of_birth'],
     );
