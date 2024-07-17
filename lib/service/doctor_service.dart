@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:schedule_management/model/doctor_model.dart';
+import 'package:schedule_management/service/config.dart';
 
 class DoctorService {
-  static const String baseUrl = 'http://10.0.2.2:3000/api/doctor';
+  static String baseUrl = '${Config.base}/api/doctor';
 
   Future<List<Doctor>> getAllDoctors() async {
     final response = await http.get(Uri.parse('$baseUrl/getAll'));

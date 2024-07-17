@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:schedule_management/features/bottom_navigator/notifier/bottom_navigation_notifier.dart';
-import 'package:schedule_management/features/chat/chat_view.dart';
+import 'package:schedule_management/features/conversation/conversations_view.dart';
 import 'package:schedule_management/features/home/home_view.dart';
 import 'package:schedule_management/features/profile/profile_view.dart';
 import 'package:schedule_management/features/search/search_view.dart';
@@ -44,7 +44,7 @@ class _BottomNavigationViewState
               controller: _pageController,
               children: const [
                 HomeView(),
-                ChatView(),
+                ConversationsView(),
                 SearchView(),
                 ProfileView(),
               ],

@@ -38,7 +38,82 @@ class ProfileView extends HookWidget {
       }
     }
 
+    Future<void> _handleDeleteAccount(BuildContext context) async {
+      TextEditingController passwordController = TextEditingController();
+      bool isLoading = false;
+
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return AlertDialog(
+                title: const Text('Delete Account'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        labelText: 'Password',
+                      ),
+                    ),
+                    if (isLoading) const CircularProgressIndicator(),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: const Text('Delete'),
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+
+                      try {
+                        final response = await authService.deleteUser(
+                          user.value!.id,
+                          passwordController.text,
+                        );
+
+                        if (response['status'] == 0) {
+                          Navigator.of(context).pop();
+                          Routes.goToSignInScreen(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(response['msg'])),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(response['msg'])),
+                          );
+                        }
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(e.toString())),
+                        );
+                      } finally {
+                        setState(() {
+                          isLoading = false;
+                        });
+                      }
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      );
+    }
+
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: ColorUtils.primaryBackgroundColor,
       appBar: AppBar(
         backgroundColor: ColorUtils.primaryBackgroundColor,
@@ -55,106 +130,109 @@ class ProfileView extends HookWidget {
           ? Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               padding: const EdgeInsets.only(bottom: 40),
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(30),
-                    margin: const EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      gradient: LinearGradient(
-                        colors: [
-                          ColorUtils.blueColor,
-                          ColorUtils.blueMiddleColor,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(30),
+                      margin: const EdgeInsets.symmetric(vertical: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        gradient: LinearGradient(
+                          colors: [
+                            ColorUtils.blueColor,
+                            ColorUtils.blueMiddleColor,
+                          ],
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 20.r),
+                            width: 55.w,
+                            height: 55.h,
+                            decoration: BoxDecoration(
+                              color: ColorUtils.whiteColor,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: SvgPicture.asset(
+                              'assets/icons/ic_user_account.svg',
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                user.value!.name,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: ColorUtils.whiteColor,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                user.value!.email,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: ColorUtils.whiteColor,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 20.r),
-                          width: 55.w,
-                          height: 55.h,
-                          decoration: BoxDecoration(
-                            color: ColorUtils.whiteColor,
-                            borderRadius: BorderRadius.circular(15),
+                    ButtonSettingsWidget(
+                      icon: SvgPicture.asset(
+                        'assets/icons/ic_user_account.svg',
+                      ),
+                      title: 'Account profile',
+                      onPressed: _handleUpdateUser,
+                    ),
+                    Container(
+                      height: 1,
+                      width: double.infinity,
+                      color: ColorUtils.textColor,
+                    ),
+                    ButtonSettingsWidget(
+                      icon: SvgPicture.asset(
+                        'assets/icons/ic_calender.svg',
+                      ),
+                      title: 'My Appointments',
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AppointmentsView(),
                           ),
-                          child: SvgPicture.asset(
-                            'assets/icons/ic_user_account.svg',
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              user.value!.name,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: ColorUtils.whiteColor,
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              user.value!.email,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: ColorUtils.whiteColor,
-                                fontSize: 14.sp,
-                              ),
-                            ),
-                          ],
                         )
-                      ],
+                      },
                     ),
-                  ),
-                  ButtonSettingsWidget(
-                    icon: SvgPicture.asset(
-                      'assets/icons/ic_user_account.svg',
+                    Container(
+                      height: 1,
+                      width: double.infinity,
+                      color: ColorUtils.textColor,
                     ),
-                    title: 'Account profile',
-                    onPressed: _handleUpdateUser,
-                  ),
-                  Container(
-                    height: 1,
-                    width: double.infinity,
-                    color: ColorUtils.textColor,
-                  ),
-                  ButtonSettingsWidget(
-                    icon: SvgPicture.asset(
-                      'assets/icons/ic_calender.svg',
+                    ButtonSettingsWidget(
+                      icon: SvgPicture.asset(
+                        'assets/icons/ic_delete.svg',
+                      ),
+                      title: 'Delete Account',
+                      onPressed: () => _handleDeleteAccount(context),
                     ),
-                    title: 'My Appointments',
-                    onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AppointmentsView(),
-                        ),
-                      )
-                    },
-                  ),
-                  Container(
-                    height: 1,
-                    width: double.infinity,
-                    color: ColorUtils.textColor,
-                  ),
-                  ButtonSettingsWidget(
-                    icon: SvgPicture.asset(
-                      'assets/icons/ic_delete.svg',
+                    SizedBox(
+                      height: 40,
                     ),
-                    title: 'Delete Account',
-                    onPressed: () => {},
-                  ),
-                  const Expanded(child: SizedBox.shrink()),
-                  TextButtonWidget(
-                    label: 'Logout',
-                    onPressed: () => Routes.goToSignInScreen(context),
-                  ),
-                ],
+                    TextButtonWidget(
+                      label: 'Logout',
+                      onPressed: () => Routes.goToSignInScreen(context),
+                    ),
+                  ],
+                ),
               ),
             )
           : Center(child: CircularProgressIndicator()),

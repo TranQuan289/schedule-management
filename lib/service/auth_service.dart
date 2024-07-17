@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:schedule_management/model/user_model.dart';
+import 'package:schedule_management/service/config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  static const String baseUrl = "http://10.0.2.2:3000/api/u/register";
+  static String baseUrl = "${Config.base}/api/u/register";
 
   Future<Map<String, dynamic>> registerUser(User user) async {
     final response = await http.post(
@@ -22,7 +23,7 @@ class AuthService {
     }
   }
 
-  static const String loginUrl = "http://10.0.2.2:3000/api/u/login";
+  static String loginUrl = "${Config.base}/api/u/login";
 
   Future<Map<String, dynamic>> loginUser(String email, String password) async {
     final response = await http.post(
@@ -78,7 +79,7 @@ class AuthService {
     return null;
   }
 
-  static const String profileUrl = "http://10.0.2.2:3000/api/u";
+  static String profileUrl = "${Config.base}/api/u";
 
   Future<Map<String, dynamic>> fetchUserDetails(String userId) async {
     final response = await http.get(Uri.parse('$profileUrl/$userId'));
@@ -107,6 +108,27 @@ class AuthService {
       return jsonDecode(response.body);
     } else {
       throw Exception('Failed to update user');
+    }
+  }
+
+  static String deleteUrl = "${Config.base}/api/u/delete";
+
+  Future<Map<String, dynamic>> deleteUser(
+      String userId, String password) async {
+    final response = await http.post(
+      Uri.parse('$deleteUrl/$userId'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to delete user');
     }
   }
 }

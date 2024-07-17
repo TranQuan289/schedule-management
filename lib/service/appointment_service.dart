@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:schedule_management/model/appointment_model.dart';
+import 'package:schedule_management/service/config.dart';
 
 class AppointmentService {
-  final String baseUrl = 'http://10.0.2.2:3000/api';
+  final String baseUrl = '${Config.base}/api';
 
   Future<void> bookAppointment({
     required String doctorId,
