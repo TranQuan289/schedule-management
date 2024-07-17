@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:schedule_management/common/widgets/item_doctor_widget.dart';
 import 'package:schedule_management/model/doctor_model.dart';
 import 'package:schedule_management/service/appointment_service.dart';
 import 'package:schedule_management/service/doctor_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DoctorListWidget extends StatefulWidget {
+class DoctorListWidget extends StatefulHookWidget {
   @override
   _DoctorListWidgetState createState() => _DoctorListWidgetState();
 }
@@ -13,11 +14,20 @@ class DoctorListWidget extends StatefulWidget {
 class _DoctorListWidgetState extends State<DoctorListWidget> {
   late Future<List<Doctor>> _doctorListFuture;
   final AppointmentService appointmentService = AppointmentService();
+  late String id;
 
   @override
   void initState() {
     super.initState();
+    _loadUserId();
     _doctorListFuture = DoctorService().getAllDoctors();
+  }
+
+  Future<void> _loadUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      id = prefs.getString('_id') ?? "";
+    });
   }
 
   @override
@@ -32,6 +42,7 @@ class _DoctorListWidgetState extends State<DoctorListWidget> {
             itemBuilder: (context, index) {
               Doctor doctor = doctors[index];
               return ItemDoctorWidget(
+                idUser: id,
                 doctor: doctor,
                 onBookAppointment: (start, end) =>
                     _bookAppointment(context, doctor, start, end),
@@ -53,11 +64,9 @@ class _DoctorListWidgetState extends State<DoctorListWidget> {
   void _bookAppointment(
       BuildContext context, Doctor doctor, DateTime start, DateTime end) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      String? id = prefs.getString('_id');
       await appointmentService.bookAppointment(
         doctorId: doctor.id,
-        userId: id ?? "",
+        userId: id,
         startTime: start,
         endTime: end,
       );
@@ -71,7 +80,7 @@ class _DoctorListWidgetState extends State<DoctorListWidget> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('${e.toString()}'),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.red,
         ),
       );
     }

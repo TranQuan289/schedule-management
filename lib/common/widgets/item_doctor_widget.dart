@@ -1,19 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule_management/model/doctor_model.dart';
+import 'package:schedule_management/service/conversation_service.dart';
 import 'package:schedule_management/utils/color_utils.dart';
 
-class ItemDoctorWidget extends StatelessWidget {
+class ItemDoctorWidget extends HookWidget {
   final Doctor doctor;
+  final String idUser;
   final void Function(DateTime start, DateTime end)? onBookAppointment;
 
   const ItemDoctorWidget({
     required this.doctor,
+    required this.idUser,
     this.onBookAppointment,
   });
 
   @override
   Widget build(BuildContext context) {
+    final conversationService = useMemoized(() {
+      final service = ConversationService();
+      service.initSocket(idUser);
+      return service;
+    });
+
+    // useEffect(() {
+    //   return () {
+    //     conversationService.dispose();
+    //   };
+    // }, []);
+
+    Future<void> _handleChat(BuildContext context) async {
+      TextEditingController chatController = TextEditingController();
+      bool isLoading = false;
+
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return AlertDialog(
+                title: const Text('Send Message'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextField(
+                      controller: chatController,
+                      decoration: const InputDecoration(
+                        labelText: 'Chat',
+                      ),
+                    ),
+                    if (isLoading) const CircularProgressIndicator(),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: const Text('Send'),
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      Navigator.of(context).pop();
+                      try {
+                        conversationService.sendMessage(
+                            doctor.id, chatController.text);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Send message complete')),
+                        );
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(e.toString())),
+                        );
+                      } finally {
+                        setState(() {
+                          isLoading = false;
+                        });
+                      }
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      );
+    }
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.all(15),
@@ -90,11 +168,28 @@ class ItemDoctorWidget extends StatelessWidget {
             ],
           ),
           SizedBox(height: 10.h),
-          ElevatedButton(
-            onPressed: () {
-              _showDateTimePicker(context);
-            },
-            child: Text('Book Appointment'),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _showDateTimePicker(context);
+                  },
+                  child: Text('Booking'),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _handleChat(context);
+                  },
+                  child: Text('Chat'),
+                ),
+              ),
+            ],
           ),
         ],
       ),

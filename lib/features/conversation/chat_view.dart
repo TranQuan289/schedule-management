@@ -33,11 +33,11 @@ class ChatView extends HookWidget {
         () => conversationService.getMessagesStream(conversationId));
     final scrollController = useScrollController();
 
-    useEffect(() {
-      return () {
-        conversationService.dispose();
-      };
-    }, []);
+    // useEffect(() {
+    //   return () {
+    //     conversationService.dispose();
+    //   };
+    // }, []);
 
     return Scaffold(
       backgroundColor: ColorUtils.primaryBackgroundColor,

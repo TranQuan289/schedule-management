@@ -74,6 +74,7 @@ class _SearchViewState extends State<SearchView> {
                           itemCount: _searchResults.length,
                           itemBuilder: (context, index) {
                             return ItemDoctorWidget(
+                              idUser: '',
                               doctor: _searchResults[index],
                               onBookAppointment: (start, end) =>
                                   _bookAppointment(context,
