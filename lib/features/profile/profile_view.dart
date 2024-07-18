@@ -82,7 +82,7 @@ class ProfileView extends HookWidget {
                           passwordController.text,
                         );
 
-                        if (response['status'] == 0) {
+                        if (response['status'] == 1) {
                           Navigator.of(context).pop();
                           Routes.goToSignInScreen(context);
                           ScaffoldMessenger.of(context).showSnackBar(

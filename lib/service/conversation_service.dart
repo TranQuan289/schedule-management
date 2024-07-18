@@ -66,7 +66,7 @@ class ConversationService {
 
     if (response.statusCode == 200) {
       Map<String, dynamic> responseBody = jsonDecode(response.body);
-      if (responseBody['status'] == 0) {
+      if (responseBody['status'] == 1) {
         Map<String, dynamic> userData = responseBody['data'];
         return User.fromJson(userData);
       } else {
@@ -106,7 +106,7 @@ class ConversationService {
   }
 
   void initSocket(String currentUserId) {
-    _socket = IO.io('http://192.168.1.7:3000', <String, dynamic>{
+    _socket = IO.io('http://10.20.23.243:3000', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });
@@ -160,8 +160,8 @@ class ConversationService {
     _socket?.disconnect();
   }
 
-  // void dispose() {
-  //   disconnectSocket();
-  //   _messagesController.close();
-  // }
+  void dispose() {
+    disconnectSocket();
+    _messagesController.close();
+  }
 }

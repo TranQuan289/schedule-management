@@ -39,7 +39,7 @@ class AuthService {
 
     if (response.statusCode == 200) {
       var responseBody = jsonDecode(response.body);
-      if (responseBody['status'] == 0) {
+      if (responseBody['status'] == 1) {
         User user = User.fromJson(responseBody['data']['user']);
         await saveUser(user);
         return responseBody;

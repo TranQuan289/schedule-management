@@ -24,11 +24,11 @@ class ItemDoctorWidget extends HookWidget {
       return service;
     });
 
-    // useEffect(() {
-    //   return () {
-    //     conversationService.dispose();
-    //   };
-    // }, []);
+    useEffect(() {
+      return () {
+        conversationService.dispose();
+      };
+    }, []);
 
     Future<void> _handleChat(BuildContext context) async {
       TextEditingController chatController = TextEditingController();

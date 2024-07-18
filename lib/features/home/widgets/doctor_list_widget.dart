@@ -73,14 +73,14 @@ class _DoctorListWidgetState extends State<DoctorListWidget> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Appointment booked successfully'),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.grey,
         ),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('${e.toString()}'),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.grey,
         ),
       );
     }
