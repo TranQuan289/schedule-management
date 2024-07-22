@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule_management/utils/routes/routes.dart';
 import 'package:schedule_management/utils/routes/routes_name.dart';
 
-
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        title: 'Schedule management1',
+        title: 'Schedule management',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
