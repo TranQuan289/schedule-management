@@ -48,7 +48,7 @@ class ProfileView extends HookWidget {
           return StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
               return AlertDialog(
-                title: const Text('Delete Account'),
+                title: const Text('Xóa Tài Khoản'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -56,7 +56,7 @@ class ProfileView extends HookWidget {
                       controller: passwordController,
                       obscureText: true,
                       decoration: const InputDecoration(
-                        labelText: 'Password',
+                        labelText: 'Mật khẩu',
                       ),
                     ),
                     if (isLoading) const CircularProgressIndicator(),
@@ -64,13 +64,13 @@ class ProfileView extends HookWidget {
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('Cancel'),
+                    child: const Text('Hủy'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child: const Text('Delete'),
+                    child: const Text('Xóa'),
                     onPressed: () async {
                       setState(() {
                         isLoading = true;
@@ -118,7 +118,7 @@ class ProfileView extends HookWidget {
       appBar: AppBar(
         backgroundColor: ColorUtils.primaryBackgroundColor,
         title: Text(
-          'Profile',
+          'Hồ sơ',
           style: TextStyle(
             color: ColorUtils.primaryColor,
             fontSize: 24.sp,
@@ -190,7 +190,7 @@ class ProfileView extends HookWidget {
                       icon: SvgPicture.asset(
                         'assets/icons/ic_user_account.svg',
                       ),
-                      title: 'Account profile',
+                      title: 'Hồ sơ tài khoản',
                       onPressed: _handleUpdateUser,
                     ),
                     Container(
@@ -202,7 +202,7 @@ class ProfileView extends HookWidget {
                       icon: SvgPicture.asset(
                         'assets/icons/ic_calender.svg',
                       ),
-                      title: 'My Appointments',
+                      title: 'Lịch hẹn của tôi',
                       onPressed: () => {
                         Navigator.push(
                           context,
@@ -221,14 +221,14 @@ class ProfileView extends HookWidget {
                       icon: SvgPicture.asset(
                         'assets/icons/ic_delete.svg',
                       ),
-                      title: 'Delete Account',
+                      title: 'Xóa Tài Khoản',
                       onPressed: () => _handleDeleteAccount(context),
                     ),
                     SizedBox(
                       height: 40,
                     ),
                     TextButtonWidget(
-                      label: 'Logout',
+                      label: 'Đăng xuất',
                       onPressed: () => Routes.goToSignInScreen(context),
                     ),
                   ],

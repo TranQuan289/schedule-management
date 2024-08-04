@@ -20,24 +20,24 @@ class ButtonSettingsWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.resolveWith(
+        backgroundColor: MaterialStateProperty.resolveWith(
           (states) => Colors.transparent,
         ),
-        shadowColor: WidgetStateProperty.resolveWith(
+        shadowColor: MaterialStateProperty.resolveWith(
           (states) => Colors.transparent,
         ),
-        overlayColor: WidgetStateProperty.resolveWith(
+        overlayColor: MaterialStateProperty.resolveWith(
           (states) => ColorUtils.blueDartLightColor,
         ),
-        elevation: WidgetStateProperty.resolveWith<double>(
+        elevation: MaterialStateProperty.resolveWith<double>(
           (states) => 0,
         ),
-        shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
+        shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
           (states) => RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0),
           ),
         ),
-        padding: WidgetStateProperty.all(EdgeInsets.zero),
+        padding: MaterialStateProperty.all(EdgeInsets.zero),
       ),
       child: Container(
         width: double.infinity,

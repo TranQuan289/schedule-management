@@ -51,7 +51,7 @@ class _SignUpViewState extends State<SignUpView> {
       } catch (e) {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Failed to register user'),
+          content: Text('Đăng ký thất bại'),
         ));
       }
     }
@@ -71,7 +71,7 @@ class _SignUpViewState extends State<SignUpView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Nice to know you!',
+                  'Rất vui được biết bạn!',
                   style: TextStyle(
                     color: ColorUtils.primaryColor,
                     fontSize: 20.sp,
@@ -79,7 +79,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                 ),
                 Text(
-                  'Enter your account to continue',
+                  'Nhập tài khoản của bạn để tiếp tục',
                   style: TextStyle(
                     color: ColorUtils.textColor,
                     fontSize: 14,
@@ -89,8 +89,8 @@ class _SignUpViewState extends State<SignUpView> {
                   height: 10.h,
                 ),
                 TextFormFieldCustomWidget(
-                  hint: 'Your full name',
-                  label: "Full name",
+                  hint: 'Tên đầy đủ của bạn',
+                  label: "Tên đầy đủ",
                   controller: _nameController,
                   inputAction: TextInputAction.next,
                 ),
@@ -98,8 +98,8 @@ class _SignUpViewState extends State<SignUpView> {
                   height: 20.h,
                 ),
                 TextFormFieldCustomWidget(
-                  hint: 'Your email address',
-                  label: "Email address",
+                  hint: 'Địa chỉ email của bạn',
+                  label: "Địa chỉ email",
                   inputAction: TextInputAction.next,
                   controller: _emailController,
                 ),
@@ -107,8 +107,8 @@ class _SignUpViewState extends State<SignUpView> {
                   height: 20.h,
                 ),
                 TextFormFieldCustomWidget(
-                  hint: 'Your phone number',
-                  label: "Phone number",
+                  hint: 'Số điện thoại của bạn',
+                  label: "Số điện thoại",
                   inputAction: TextInputAction.next,
                   controller: _phoneController,
                   textInputType: TextInputType.phone,
@@ -117,8 +117,8 @@ class _SignUpViewState extends State<SignUpView> {
                   height: 20.h,
                 ),
                 TextFormFieldCustomWidget(
-                  hint: 'Your password',
-                  label: "Password",
+                  hint: 'Mật khẩu của bạn',
+                  label: "Mật khẩu",
                   controller: _passwordController,
                   inputAction: TextInputAction.done,
                   obscureText: !_isPasswordVisible,
@@ -139,7 +139,7 @@ class _SignUpViewState extends State<SignUpView> {
                   height: 20.h,
                 ),
                 TextButtonWidget(
-                  label: 'Register',
+                  label: 'Đăng ký',
                   onPressed: _register,
                 ),
                 SizedBox(
@@ -155,7 +155,7 @@ class _SignUpViewState extends State<SignUpView> {
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 10.w),
                       child: Text(
-                        "Or register with",
+                        "Hoặc đăng ký bằng",
                         style: TextStyle(
                           color: ColorUtils.primaryColor,
                           fontSize: 14,
@@ -178,7 +178,7 @@ class _SignUpViewState extends State<SignUpView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Already have an account? ',
+                        'Bạn đã có tài khoản? ',
                         style: TextStyle(
                           color: ColorUtils.textColor,
                           fontSize: 14,
@@ -187,7 +187,7 @@ class _SignUpViewState extends State<SignUpView> {
                       GestureDetector(
                         onTap: () => Routes.goToSignInScreen(context),
                         child: Text(
-                          'Login',
+                          'Đăng nhập',
                           style: TextStyle(
                             color: ColorUtils.primaryColor,
                             fontWeight: FontWeight.bold,

@@ -19,7 +19,7 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to register user');
+      throw Exception('Không thể đăng ký người dùng');
     }
   }
 
@@ -47,7 +47,7 @@ class AuthService {
         throw Exception(responseBody['msg']);
       }
     } else {
-      throw Exception('Failed to login user');
+      throw Exception('Không thể đăng nhập người dùng');
     }
   }
 
@@ -87,7 +87,7 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body)['data'];
     } else {
-      throw Exception('Failed to fetch user details');
+      throw Exception('Không thể tải thông tin người dùng');
     }
   }
 
@@ -107,7 +107,7 @@ class AuthService {
 
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to update user');
+      throw Exception('Không thể cập nhật thông tin người dùng');
     }
   }
 
@@ -128,7 +128,7 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to delete user');
+      throw Exception('Không thể xóa người dùng');
     }
   }
 }

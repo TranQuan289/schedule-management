@@ -35,7 +35,7 @@ class ConversationsView extends HookWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Conversations',
+          'Cuộc trò chuyện',
           style: TextStyle(
             color: ColorUtils.primaryColor,
             fontSize: 28.sp,
@@ -61,7 +61,7 @@ class ConversationsView extends HookWidget {
                       children: [
                         Icon(Icons.error_outline, size: 48, color: Colors.red),
                         SizedBox(height: 16),
-                        Text('Error loading conversations',
+                        Text('Lỗi khi tải cuộc trò chuyện',
                             style: TextStyle(fontSize: 18)),
                       ],
                     ),
@@ -75,7 +75,7 @@ class ConversationsView extends HookWidget {
                         Icon(Icons.chat_bubble_outline,
                             size: 48, color: ColorUtils.primaryColor),
                         SizedBox(height: 16),
-                        Text('No conversations yet',
+                        Text('Chưa có cuộc trò chuyện nào',
                             style: TextStyle(fontSize: 18)),
                       ],
                     ),
@@ -95,8 +95,8 @@ class ConversationsView extends HookWidget {
                         : '';
 
                     String messagePreview = lastMessage != null
-                        ? '${lastMessage.sender == currentUserId.value ? 'You: ' : ''}${lastMessage.content}'
-                        : 'No messages yet';
+                        ? '${lastMessage.sender == currentUserId.value ? 'Bạn: ' : ''}${lastMessage.content}'
+                        : 'Chưa có tin nhắn nào';
 
                     return Padding(
                       padding:
@@ -205,7 +205,7 @@ class ConversationsView extends HookWidget {
                                               BorderRadius.circular(10),
                                         ),
                                         child: Text(
-                                          'New',
+                                          'Mới',
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 12.sp,

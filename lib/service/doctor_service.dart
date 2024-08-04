@@ -13,7 +13,7 @@ class DoctorService {
       Iterable list = json.decode(response.body)['data'];
       return list.map((model) => Doctor.fromJson(model)).toList();
     } else {
-      throw Exception('Failed to load doctors');
+      throw Exception('Không thể tải danh sách bác sĩ');
     }
   }
 
@@ -27,10 +27,10 @@ class DoctorService {
             .map((doctorJson) => Doctor.fromJsonSearch(doctorJson))
             .toList();
       } else {
-        throw Exception(jsonResponse['msg'] ?? 'Failed to search doctors');
+        throw Exception(jsonResponse['msg'] ?? 'Không thể tìm bác sĩ');
       }
     } else {
-      throw Exception('Failed to search doctors');
+      throw Exception('Không thể tìm bác sĩ');
     }
   }
 }

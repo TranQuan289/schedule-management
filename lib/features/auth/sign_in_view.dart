@@ -44,7 +44,7 @@ class _SignInViewState extends State<SignInView> {
       } catch (e) {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Failed to login user'),
+          content: Text('Đăng nhập thất bại'),
         ));
       }
     }
@@ -64,14 +64,14 @@ class _SignInViewState extends State<SignInView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Welcome to Schedule Management',
+                  'Chào mừng đến với \nQuản lý Lịch hẹn',
                   style: TextStyle(
                       color: ColorUtils.primaryColor,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Enter your account to continue',
+                  'Nhập tài khoản của bạn để tiếp tục',
                   style: TextStyle(
                     color: ColorUtils.textColor,
                     fontSize: 14,
@@ -84,8 +84,8 @@ class _SignInViewState extends State<SignInView> {
                   height: 20.h,
                 ),
                 TextFormFieldCustomWidget(
-                  hint: 'Your email address',
-                  label: "Email address",
+                  hint: 'Địa chỉ email của bạn',
+                  label: "Địa chỉ email",
                   inputAction: TextInputAction.next,
                   controller: _emailController,
                 ),
@@ -93,8 +93,8 @@ class _SignInViewState extends State<SignInView> {
                   height: 20.h,
                 ),
                 TextFormFieldCustomWidget(
-                  hint: 'Your password',
-                  label: "Password",
+                  hint: 'Mật khẩu của bạn',
+                  label: "Mật khẩu",
                   controller: _passwordController,
                   inputAction: TextInputAction.done,
                   obscureText: !_isPasswordVisible,
@@ -115,7 +115,7 @@ class _SignInViewState extends State<SignInView> {
                   height: 50.h,
                 ),
                 TextButtonWidget(
-                  label: 'Login',
+                  label: 'Đăng nhập',
                   onPressed: _login,
                 ),
                 SizedBox(
@@ -131,7 +131,7 @@ class _SignInViewState extends State<SignInView> {
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 10.w),
                       child: Text(
-                        "Or login with",
+                        "Hoặc đăng nhập bằng",
                         style: TextStyle(
                           color: ColorUtils.primaryColor,
                           fontSize: 14,
@@ -154,7 +154,7 @@ class _SignInViewState extends State<SignInView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Didn\'t you have an account? ',
+                        'Bạn chưa có tài khoản? ',
                         style: TextStyle(
                           color: ColorUtils.textColor,
                           fontSize: 14,
@@ -163,7 +163,7 @@ class _SignInViewState extends State<SignInView> {
                       GestureDetector(
                         onTap: () => Routes.goToSignUpScreen(context),
                         child: Text(
-                          'Register',
+                          'Đăng ký',
                           style: TextStyle(
                             color: ColorUtils.primaryColor,
                             fontWeight: FontWeight.bold,

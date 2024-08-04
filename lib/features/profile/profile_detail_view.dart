@@ -46,7 +46,7 @@ class ProfileDetailView extends HookWidget {
           Navigator.pop(context, true);
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to update user')),
+            SnackBar(content: Text('Cập nhật người dùng thất bại')),
           );
         } finally {
           isLoading.value = false;
@@ -56,7 +56,7 @@ class ProfileDetailView extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account profile'),
+        title: Text('Hồ sơ tài khoản'),
         backgroundColor: ColorUtils.primaryBackgroundColor,
       ),
       body: isLoading.value
@@ -70,22 +70,22 @@ class ProfileDetailView extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormFieldCustomWidget(
-                      label: 'Name',
+                      label: 'Tên',
                       controller: nameController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your name';
+                          return 'Vui lòng nhập tên của bạn';
                         }
                         return null;
                       },
                     ),
                     SizedBox(height: 20),
                     TextFormFieldCustomWidget(
-                      label: 'Phone',
+                      label: 'Số điện thoại',
                       controller: phoneController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your phone number';
+                          return 'Vui lòng nhập số điện thoại của bạn';
                         }
                         return null;
                       },
@@ -96,25 +96,25 @@ class ProfileDetailView extends HookWidget {
                       controller: emailController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your email address';
+                          return 'Vui lòng nhập địa chỉ email của bạn';
                         }
                         return null;
                       },
                     ),
                     SizedBox(height: 20),
                     TextFormFieldCustomWidget(
-                      label: 'Date of Birth',
+                      label: 'Ngày sinh',
                       controller: dobController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your date of birth';
+                          return 'Vui lòng nhập ngày sinh của bạn';
                         }
                         return null;
                       },
                     ),
                     SizedBox(height: 50),
                     TextButtonWidget(
-                      label: 'Update',
+                      label: 'Cập nhật',
                       onPressed: _updateUser,
                     ),
                   ],
@@ -146,7 +146,7 @@ class ProfileDetailView extends HookWidget {
               .split(' ')[0]
           : '';
     } catch (e) {
-      print('Error fetching user data: $e');
+      print('Lỗi khi lấy dữ liệu người dùng: $e');
     } finally {
       isLoading.value = false;
     }

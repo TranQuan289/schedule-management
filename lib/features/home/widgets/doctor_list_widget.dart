@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:schedule_management/common/widgets/item_doctor_widget.dart';
+import 'package:schedule_management/features/home/doctor_detail_screen.dart';
 import 'package:schedule_management/model/doctor_model.dart';
 import 'package:schedule_management/service/appointment_service.dart';
 import 'package:schedule_management/service/doctor_service.dart';
@@ -41,17 +42,25 @@ class _DoctorListWidgetState extends State<DoctorListWidget> {
             itemCount: doctors.length,
             itemBuilder: (context, index) {
               Doctor doctor = doctors[index];
-              return ItemDoctorWidget(
-                idUser: id,
-                doctor: doctor,
-                onBookAppointment: (start, end) =>
-                    _bookAppointment(context, doctor, start, end),
+              return GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DoctorDetailScreen(doctor: doctor),
+                  ),
+                ),
+                child: ItemDoctorWidget(
+                  idUser: id,
+                  doctor: doctor,
+                  onBookAppointment: (start, end) =>
+                      _bookAppointment(context, doctor, start, end),
+                ),
               );
             },
           );
         } else if (snapshot.hasError) {
           return Center(
-            child: Text('Error: ${snapshot.error}'),
+            child: Text('Lỗi: ${snapshot.error}'),
           );
         }
         return Center(
@@ -72,7 +81,7 @@ class _DoctorListWidgetState extends State<DoctorListWidget> {
       );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Appointment booked successfully'),
+          content: Text('Đặt lịch hẹn thành công'),
           backgroundColor: Colors.grey,
         ),
       );

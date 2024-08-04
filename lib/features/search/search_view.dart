@@ -36,7 +36,7 @@ class _SearchViewState extends State<SearchView> {
         _isLoading = false;
         _searchResults = [];
       });
-      print('Error searching doctors: $e');
+      print('Lỗi khi tìm kiếm bác sĩ: $e');
     }
   }
 
@@ -47,7 +47,7 @@ class _SearchViewState extends State<SearchView> {
       appBar: AppBar(
         backgroundColor: ColorUtils.primaryBackgroundColor,
         title: Text(
-          'Search',
+          'Tìm kiếm',
           style: TextStyle(
             color: ColorUtils.primaryColor,
             fontSize: 24.sp,
@@ -69,7 +69,7 @@ class _SearchViewState extends State<SearchView> {
               child: _isLoading
                   ? Center(child: CircularProgressIndicator())
                   : _searchResults.isEmpty
-                      ? Center(child: Text('No results found'))
+                      ? Center(child: Text('Không tìm thấy kết quả'))
                       : ListView.builder(
                           itemCount: _searchResults.length,
                           itemBuilder: (context, index) {
@@ -102,14 +102,14 @@ class _SearchViewState extends State<SearchView> {
       );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Appointment booked successfully'),
+          content: Text('Đặt lịch hẹn thành công'),
           backgroundColor: Colors.green,
         ),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to book appointment: ${e.toString()}'),
+          content: Text('Không thể đặt lịch hẹn: ${e.toString()}'),
           backgroundColor: Colors.red,
         ),
       );

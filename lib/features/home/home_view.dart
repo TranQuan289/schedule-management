@@ -20,7 +20,7 @@ class _HomeViewState extends State<HomeView>
       appBar: AppBar(
         backgroundColor: ColorUtils.primaryBackgroundColor,
         title: Text(
-          'List Doctors',
+          'Danh sách bác sĩ',
           style: TextStyle(
             color: ColorUtils.primaryColor,
             fontSize: 24.sp,

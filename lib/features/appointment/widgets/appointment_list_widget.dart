@@ -31,9 +31,9 @@ class _AppointmentListWidgetState extends State<AppointmentListWidget> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(child: Text('Lỗi: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('No appointments found'));
+          return Center(child: Text('Không có lịch hẹn nào được tìm thấy'));
         } else {
           return ListView.builder(
             itemCount: snapshot.data!.length,
@@ -42,23 +42,23 @@ class _AppointmentListWidgetState extends State<AppointmentListWidget> {
               return Card(
                 margin: EdgeInsets.all(8),
                 child: ListTile(
-                  title: Text('Dr. ${appointment.doctor.name}'),
+                  title: Text('Bác sĩ ${appointment.doctor.name}'),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Specialty: ${appointment.doctor.specialty}'),
+                      Text('Chuyên khoa: ${appointment.doctor.specialty}'),
                       Text(
-                          'Date: ${DateFormat('yyyy-MM-dd').format(appointment.startTime)}'),
+                          'Ngày: ${DateFormat('yyyy-MM-dd').format(appointment.startTime)}'),
                       Text(
-                          'Time: ${DateFormat('HH:mm').format(appointment.startTime)} - ${DateFormat('HH:mm').format(appointment.endTime)}'),
-                      Text('Status: ${appointment.status}'),
+                          'Giờ: ${DateFormat('HH:mm').format(appointment.startTime)} - ${DateFormat('HH:mm').format(appointment.endTime)}'),
+                      Text('Trạng thái: ${appointment.status}'),
                     ],
                   ),
                   trailing: Icon(
-                    appointment.status == 'Confirmed'
+                    appointment.status == 'Xác nhận'
                         ? Icons.check_circle
                         : Icons.cancel,
-                    color: appointment.status == 'Confirmed'
+                    color: appointment.status == 'Xác nhận'
                         ? Colors.green
                         : Colors.red,
                   ),

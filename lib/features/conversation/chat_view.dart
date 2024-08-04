@@ -12,7 +12,6 @@ class ChatView extends HookWidget {
   final String name;
   final String recipientId;
 
-
   const ChatView({
     Key? key,
     required this.conversationId,
@@ -62,10 +61,10 @@ class ChatView extends HookWidget {
                   return Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
+                  return Center(child: Text('Lỗi: ${snapshot.error}'));
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No messages'));
+                  return Center(child: Text('Không có tin nhắn'));
                 }
 
                 final messages = snapshot.data!.reversed.toList();

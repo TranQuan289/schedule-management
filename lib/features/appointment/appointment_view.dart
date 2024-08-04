@@ -7,7 +7,7 @@ class AppointmentsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Appointments'),
+        title: Text('Lịch Hẹn Của Tôi'),
       ),
       body: FutureBuilder<String?>(
         future: _getUserId(),
@@ -15,7 +15,7 @@ class AppointmentsView extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError || !snapshot.hasData) {
-            return Center(child: Text('Error: Unable to retrieve user ID'));
+            return Center(child: Text('Lỗi: Không thể lấy được ID người dùng'));
           } else {
             return AppointmentListWidget(userId: snapshot.data!);
           }

@@ -40,7 +40,7 @@ class ConversationService {
                 User user = await fetchUserDetails(memberId);
                 _userCache[memberId] = user;
               } catch (e) {
-                print('Failed to fetch user details for member $memberId: $e');
+                print('Lỗi khi lấy thông tin người dùng cho thành viên $memberId: $e');
               }
             }
           });
@@ -53,7 +53,7 @@ class ConversationService {
         throw Exception(responseBody['msg']);
       }
     } else {
-      throw Exception('Failed to fetch conversations');
+      throw Exception('Không thể lấy cuộc trò chuyện');
     }
   }
 
@@ -73,7 +73,7 @@ class ConversationService {
         throw Exception(responseBody['msg']);
       }
     } else {
-      throw Exception('Failed to fetch user details');
+      throw Exception('Không thể lấy thông tin người dùng');
     }
   }
 
@@ -89,7 +89,7 @@ class ConversationService {
         throw Exception(data['msg']);
       }
     } else {
-      throw Exception('Failed to fetch messages');
+      throw Exception('Không thể lấy tin nhắn');
     }
   }
 
@@ -106,53 +106,53 @@ class ConversationService {
   }
 
   void initSocket(String currentUserId) {
-    _socket = IO.io('http://10.20.23.243:3000', <String, dynamic>{
+    _socket = IO.io('http://192.168.102.57:3000', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });
 
     _socket!.connect();
     _socket!.on('connect', (_) {
-      print('Connected to socket server');
+      print('Kết nối thành công với máy chủ socket');
       _socket!.emit('authenticate', {'userId': currentUserId});
     });
 
     _socket!.on('connect_error', (error) {
-      print('Connection error: $error');
+      print('Lỗi kết nối: $error');
     });
 
     _socket!.on('authenticated', (response) {
       if (response['success']) {
-        print('Authenticated successfully');
+        print('Xác thực thành công');
       } else {
-        print('Authentication failed: ${response['message']}');
+        print('Xác thực thất bại: ${response['message']}');
       }
     });
 
     _socket!.on('new message', (data) {
-      print('Received new message: $data');
+      print('Nhận tin nhắn mới: $data');
       addMessageToStream(Message.fromJson(data['message']));
     });
 
     _socket!.on('message sent', (message) {
-      print('Message sent successfully: $message');
+      print('Tin nhắn đã gửi thành công: $message');
       addMessageToStream(Message.fromJson(message));
     });
 
     _socket!.on('error', (error) {
-      print('Socket error: $error');
+      print('Lỗi socket: $error');
     });
   }
 
   void sendMessage(String recipientId, String content) {
     if (_socket != null && _socket!.connected) {
-      print('Sending message: $content to recipient: $recipientId');
+      print('Gửi tin nhắn: $content đến người nhận: $recipientId');
       _socket!.emit('send message', {
         'recipientId': recipientId,
         'content': content,
       });
     } else {
-      print('Socket is not connected. Unable to send message.');
+      print('Socket chưa kết nối. Không thể gửi tin nhắn.');
     }
   }
 

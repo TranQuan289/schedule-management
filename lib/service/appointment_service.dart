@@ -37,7 +37,7 @@ class AppointmentService {
         throw Exception(responseData['msg']);
       }
     } else {
-      throw Exception('Failed to book appointment');
+      throw Exception('Không thể đặt lịch hẹn');
     }
   }
 
@@ -56,7 +56,7 @@ class AppointmentService {
         throw Exception(jsonData['msg']);
       }
     } else {
-      throw Exception('Failed to load appointments');
+      throw Exception('Không thể tải lịch hẹn');
     }
   }
 }

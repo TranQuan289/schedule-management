@@ -40,14 +40,14 @@ class ItemDoctorWidget extends HookWidget {
           return StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
               return AlertDialog(
-                title: const Text('Send Message'),
+                title: const Text('Gửi Tin Nhắn'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     TextField(
                       controller: chatController,
                       decoration: const InputDecoration(
-                        labelText: 'Chat',
+                        labelText: 'Tin Nhắn',
                       ),
                     ),
                     if (isLoading) const CircularProgressIndicator(),
@@ -55,13 +55,13 @@ class ItemDoctorWidget extends HookWidget {
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('Cancel'),
+                    child: const Text('Hủy'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child: const Text('Send'),
+                    child: const Text('Gửi'),
                     onPressed: () async {
                       setState(() {
                         isLoading = true;
@@ -71,7 +71,7 @@ class ItemDoctorWidget extends HookWidget {
                         conversationService.sendMessage(
                             doctor.id, chatController.text);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Send message complete')),
+                          SnackBar(content: Text('Gửi tin nhắn thành công')),
                         );
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -175,7 +175,7 @@ class ItemDoctorWidget extends HookWidget {
                   onPressed: () {
                     _showDateTimePicker(context);
                   },
-                  child: Text('Booking'),
+                  child: Text('Đặt lịch'),
                 ),
               ),
               SizedBox(
@@ -186,7 +186,7 @@ class ItemDoctorWidget extends HookWidget {
                   onPressed: () {
                     _handleChat(context);
                   },
-                  child: Text('Chat'),
+                  child: Text('Nhắn tin'),
                 ),
               ),
             ],
