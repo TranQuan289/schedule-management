@@ -59,9 +59,8 @@ class ConversationsView extends HookWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.error_outline, size: 48, color: Colors.red),
                         SizedBox(height: 16),
-                        Text('Lỗi khi tải cuộc trò chuyện',
+                        Text('Chưa có cuộc trò chuyện nào',
                             style: TextStyle(fontSize: 18)),
                       ],
                     ),
@@ -137,21 +136,12 @@ class ConversationsView extends HookWidget {
                             child: Row(
                               children: [
                                 CircleAvatar(
-                                  radius: 30.r,
-                                  backgroundColor: ColorUtils.primaryColor,
-                                  child: Text(
-                                    _getInitials(_getConversationTitle(
-                                      conversationService,
-                                      conversation,
-                                      currentUserId.value,
-                                    )),
-                                    style: TextStyle(
+                                    radius: 30.r,
+                                    backgroundColor: ColorUtils.primaryColor,
+                                    child: Icon(
+                                      Icons.person,
                                       color: Colors.white,
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
+                                    )),
                                 SizedBox(width: 16.w),
                                 Expanded(
                                   child: Column(

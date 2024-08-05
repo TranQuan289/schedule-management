@@ -40,7 +40,8 @@ class ConversationService {
                 User user = await fetchUserDetails(memberId);
                 _userCache[memberId] = user;
               } catch (e) {
-                print('Lỗi khi lấy thông tin người dùng cho thành viên $memberId: $e');
+                print(
+                    'Lỗi khi lấy thông tin người dùng cho thành viên $memberId: $e');
               }
             }
           });
@@ -106,7 +107,7 @@ class ConversationService {
   }
 
   void initSocket(String currentUserId) {
-    _socket = IO.io('http://192.168.102.57:3000', <String, dynamic>{
+    _socket = IO.io('http://10.20.23.243:3000', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });

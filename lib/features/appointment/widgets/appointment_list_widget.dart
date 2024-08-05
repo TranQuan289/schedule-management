@@ -31,7 +31,7 @@ class _AppointmentListWidgetState extends State<AppointmentListWidget> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text('Lỗi: ${snapshot.error}'));
+          return Center(child: Text('Chưa có lịch hẹn nào'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Center(child: Text('Không có lịch hẹn nào được tìm thấy'));
         } else {
@@ -55,10 +55,10 @@ class _AppointmentListWidgetState extends State<AppointmentListWidget> {
                     ],
                   ),
                   trailing: Icon(
-                    appointment.status == 'Xác nhận'
+                    appointment.status == 'Confirmed'
                         ? Icons.check_circle
                         : Icons.cancel,
-                    color: appointment.status == 'Xác nhận'
+                    color: appointment.status == 'Confirmed'
                         ? Colors.green
                         : Colors.red,
                   ),

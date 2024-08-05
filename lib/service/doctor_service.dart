@@ -24,7 +24,7 @@ class DoctorService {
       if (jsonResponse['status'] == 1) {
         List<dynamic> doctorsData = jsonResponse['data'];
         return doctorsData
-            .map((doctorJson) => Doctor.fromJsonSearch(doctorJson))
+            .map((doctorJson) => Doctor.fromJson(doctorJson))
             .toList();
       } else {
         throw Exception(jsonResponse['msg'] ?? 'Không thể tìm bác sĩ');

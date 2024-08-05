@@ -42,8 +42,7 @@ class AppointmentService {
   }
 
   Future<List<Appointment>> getUserAppointments(String userId) async {
-    final response =
-        await http.get(Uri.parse('$baseUrl/appointment/u/$userId'));
+    final response = await http.get(Uri.parse('$baseUrl/appointment/u/$userId'));
 
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
