@@ -106,11 +106,7 @@ class ConversationsView extends HookWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ChatView(
-                                name: _getConversationTitle(
-                                  conversationService,
-                                  conversation,
-                                  currentUserId.value,
-                                ),
+                                name: conversation.nameDoctor,
                                 conversationId: conversation.id,
                                 currentUserId: currentUserId.value!,
                                 recipientId: conversation.members.firstWhere(
@@ -149,11 +145,7 @@ class ConversationsView extends HookWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        _getConversationTitle(
-                                          conversationService,
-                                          conversation,
-                                          currentUserId.value,
-                                        ),
+                                        conversation.nameDoctor,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16.sp,

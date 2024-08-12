@@ -10,6 +10,7 @@ class ConversationService {
   static String conversationsUrl = "${Config.base}/api/conversation/u";
   static String userUrl = "${Config.base}/api/u";
   static String messagesUrl = "${Config.base}/api/message";
+  static String doctorUrl = "${Config.base}/api/doctor";
 
   Map<String, User> _userCache = {};
   List<Message> _messages = [];
@@ -107,7 +108,7 @@ class ConversationService {
   }
 
   void initSocket(String currentUserId) {
-    _socket = IO.io('http://10.20.23.243:3000', <String, dynamic>{
+    _socket = IO.io(Config.base, <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });

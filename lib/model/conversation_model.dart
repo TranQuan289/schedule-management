@@ -1,9 +1,10 @@
 class Conversation {
   final String id;
-   List<String> members;
+  List<String> members;
   final Message? lastMessage;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String nameDoctor;
 
   Conversation({
     required this.id,
@@ -11,6 +12,7 @@ class Conversation {
     this.lastMessage,
     required this.createdAt,
     required this.updatedAt,
+    required this.nameDoctor,
   });
 
   factory Conversation.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class Conversation {
           : null,
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
+      nameDoctor: json['name_doctor'],
     );
   }
 }
